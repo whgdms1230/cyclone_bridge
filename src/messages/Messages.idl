@@ -1,0 +1,34 @@
+module CycloneBridgeData
+{
+  module Operator_Constants
+  {
+    const unsigned long PLUS = 0;
+    const unsigned long MINUS = 1;
+    const unsigned long MULTIPLY = 2;
+    const unsigned long DIVISION = 3;
+  };
+  struct Operator
+  {
+    unsigned long op;
+  };
+  struct Variable
+  {
+    float var;
+  };
+  struct Result
+  {
+    string msg;
+    float ans;
+  };
+  struct Request
+  {
+    string name;
+    sequence<Operator> ops;
+    sequence<Variable> vars;
+  };
+  struct Response
+  {
+    string name;
+    Result res;
+  };
+};
