@@ -26,15 +26,11 @@ public:
   /// DDS related fields required for the client to operate
   struct Fields
   {
-    /// DDS participant that is tied to the configured dds_domain_id
     dds_entity_t participant;
 
-    /// DDS publisher that handles sending out current robot states to the 
-    /// server
     dds::DDSPublishHandler<CycloneBridgeData_Request>::SharedPtr
         request_pub;
 
-    /// DDS subscriber for mode requests coming from the server
     dds::DDSSubscribeHandler<CycloneBridgeData_Response>::SharedPtr 
         response_sub;
   };

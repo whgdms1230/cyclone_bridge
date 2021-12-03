@@ -42,4 +42,4 @@ private:
 
 } // namespace cyclone_bridge
 
-#endif // CYCLONE_BRIDGE__INCLUDE__CYCLONE_BRIDGE__CLIENT_HPP
+#endif // CYCLONE_BRIDGE__INCLUDE__CYCLONE_BRIDGE__ROS1_HPP
