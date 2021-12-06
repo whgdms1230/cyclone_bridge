@@ -34,13 +34,13 @@ ROS2Bridge::SharedPtr ROS2Bridge::make(const ROS2Config& _config)
               participant, &CycloneBridgeData_Response_desc,
               _config.dds_response_topic));
 
-  if (!request_pub->is_ready() || !response_sub->is_ready())
+  if (!request_sub->is_ready() || !response_pub->is_ready())
     return nullptr;
 
-  ros2_bridge->impl->start(ROS1Impl::Fields{
+  ros2_bridge->impl->start(ROS2Impl::Fields{
       std::move(participant),
-      std::move(request_pub),
-      std::move(response_sub)});
+      std::move(request_sub),
+      std::move(response_pub)});
   return ros2_bridge;
 }
 

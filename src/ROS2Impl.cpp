@@ -27,7 +27,7 @@ bool ROS2Bridge::ROS2Impl::read_request(messages::Request& _new_request)
   auto request = fields.request_sub->read();
   if (!request.empty())
   {
-    convert(*(request[i]), _new_request);
+    convert(*(request[0]), _new_request);
     return true;
   }
   return false;
