@@ -23,24 +23,24 @@ ROS1Bridge::SharedPtr ROS1Bridge::make(const ROS1Config& _config)
     return nullptr;
   }
 
-  dds::DDSPublishHandler<CycloneBridgeData_Request>::SharedPtr request_pub(
-      new dds::DDSPublishHandler<CycloneBridgeData_Request>(
-          participant, &CycloneBridgeData_Request_desc,
-          _config.dds_request_topic));
+  dds::DDSPublishHandler<CycloneBridgeData_IntNumber>::SharedPtr send_pub(
+      new dds::DDSPublishHandler<CycloneBridgeData_IntNumber>(
+          participant, &CycloneBridgeData_IntNumber_desc,
+          _config.dds_ros1_to_ros2_topic));
 
-  dds::DDSSubscribeHandler<CycloneBridgeData_Response>::SharedPtr 
-      response_sub(
-          new dds::DDSSubscribeHandler<CycloneBridgeData_Response>(
-              participant, &CycloneBridgeData_Response_desc,
-              _config.dds_response_topic));
+  dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>::SharedPtr 
+      read_sub(
+          new dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>(
+              participant, &CycloneBridgeData_IntNumber_desc,
+              _config.dds_ros2_to_ros1_topic));
 
-  if (!request_pub->is_ready() || !response_sub->is_ready())
+  if (!send_pub->is_ready() || !read_sub->is_ready())
     return nullptr;
 
   ros1_bridge->impl->start(ROS1Impl::Fields{
       std::move(participant),
-      std::move(request_pub),
-      std::move(response_sub)});
+      std::move(send_pub),
+      std::move(read_sub)});
   return ros1_bridge;
 }
 
@@ -52,14 +52,14 @@ ROS1Bridge::ROS1Bridge(const ROS1Config& _config)
 ROS1Bridge::~ROS1Bridge()
 {}
 
-bool ROS1Bridge::send_request(const messages::Request& new_request)
+bool ROS1Bridge::send(const messages::IntNumber& ros1_to_ros2_num)
 {
-  return impl->send_request(new_request);
+  return impl->send(ros1_to_ros2_num);
 }
 
-bool ROS1Bridge::read_response(messages::Response& new_response)
+bool ROS1Bridge::read(messages::IntNumber& ros2_to_ros1_num)
 {
-  return impl->read_response(new_response);
+  return impl->read(ros2_to_ros1_num);
 }
 
 } // namespace cyclone_bridge

@@ -19,13 +19,9 @@ find_package(CycloneDDS REQUIRED)
 add_library(cyclone_bridge SHARED
   src/ROS1Bridge.cpp
   src/ROS1Impl.cpp
-  src/configs/ROS1Config.cpp
   src/ROS2Bridge.cpp
   src/ROS2Impl.cpp
-  src/configs/ROS2Config.cpp
   src/messages/Messages.c
-  src/messages/message_utils.cpp
-  src/dds_utils/common.cpp
 )
 
 target_include_directories(cyclone_bridge

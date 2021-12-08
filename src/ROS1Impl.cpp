@@ -1,11 +1,10 @@
 
 #include "ROS1Impl.hpp"
-#include "messages/message_utils.hpp"
 
 namespace cyclone_bridge {
 
 ROS1Bridge::ROS1Impl::ROS1Impl(const ROS1Config& _config) :
-  client_config(_config)
+  ros1_config(_config)
 {}
 
 ROS1Bridge::ROS1Impl::~ROS1Impl()
@@ -22,21 +21,22 @@ void ROS1Bridge::ROS1Impl::start(Fields _fields)
   fields = std::move(_fields);
 }
 
-bool ROS1Bridge::ROS1Impl::send_request(const messages::Request& _new_request)
+bool ROS1Bridge::ROS1Impl::send(const messages::IntNumber& ros1_to_ros2_num)
 {
-  CycloneBridgeData_Request* new_rs = CycloneBridgeData_Request__alloc();
-  convert(_new_request, *new_rs);
-  bool sent = fields.request_pub->write(new_rs);
-  CycloneBridgeData_Request_free(new_rs, DDS_FREE_ALL);
+  CycloneBridgeData_IntNumber* num = CycloneBridgeData_IntNumber__alloc();
+  num->int_num = ros1_to_ros2_num.int_num;
+
+  bool sent = fields.send_pub->write(num);
+  CycloneBridgeData_IntNumber_free(num, DDS_FREE_ALL);
   return sent;
 }
 
-bool ROS1Bridge::ROS1Impl::read_response(messages::Response& _new_response)
+bool ROS1Bridge::ROS1Impl::read(messages::IntNumber& ros2_to_ros1_num)
 {
-  auto response = fields.response_sub->read();
-  if (!response.empty())
+  auto num = fields.read_sub->read();
+  if (!num.empty())
   {
-    convert(*(response[0]), _new_response);
+    ros2_to_ros1_num.int_num = num[0]->int_num;
     return true;
   }
   return false;

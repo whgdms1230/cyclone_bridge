@@ -15,112 +15,18 @@
 extern "C" {
 #endif
 
-#define CycloneBridgeData_Operator_Constants_PLUS 0
-#define CycloneBridgeData_Operator_Constants_MINUS 1
-#define CycloneBridgeData_Operator_Constants_MULTIPLY 2
-#define CycloneBridgeData_Operator_Constants_DIVISION 3
-typedef struct CycloneBridgeData_Operator
+typedef struct CycloneBridgeData_IntNumber
 {
-  uint32_t op;
-} CycloneBridgeData_Operator;
+  uint32_t int_num;
+} CycloneBridgeData_IntNumber;
 
-extern const dds_topic_descriptor_t CycloneBridgeData_Operator_desc;
+extern const dds_topic_descriptor_t CycloneBridgeData_IntNumber_desc;
 
-#define CycloneBridgeData_Operator__alloc() \
-((CycloneBridgeData_Operator*) dds_alloc (sizeof (CycloneBridgeData_Operator)));
+#define CycloneBridgeData_IntNumber__alloc() \
+((CycloneBridgeData_IntNumber*) dds_alloc (sizeof (CycloneBridgeData_IntNumber)));
 
-#define CycloneBridgeData_Operator_free(d,o) \
-dds_sample_free ((d), &CycloneBridgeData_Operator_desc, (o))
-
-typedef struct CycloneBridgeData_Variable
-{
-  float var;
-} CycloneBridgeData_Variable;
-
-extern const dds_topic_descriptor_t CycloneBridgeData_Variable_desc;
-
-#define CycloneBridgeData_Variable__alloc() \
-((CycloneBridgeData_Variable*) dds_alloc (sizeof (CycloneBridgeData_Variable)));
-
-#define CycloneBridgeData_Variable_free(d,o) \
-dds_sample_free ((d), &CycloneBridgeData_Variable_desc, (o))
-
-typedef struct CycloneBridgeData_Result
-{
-  char * msg;
-  float ans;
-} CycloneBridgeData_Result;
-
-extern const dds_topic_descriptor_t CycloneBridgeData_Result_desc;
-
-#define CycloneBridgeData_Result__alloc() \
-((CycloneBridgeData_Result*) dds_alloc (sizeof (CycloneBridgeData_Result)));
-
-#define CycloneBridgeData_Result_free(d,o) \
-dds_sample_free ((d), &CycloneBridgeData_Result_desc, (o))
-
-#ifndef DDS_SEQUENCE_CYCLONEBRIDGEDATA_OPERATOR_DEFINED
-#define DDS_SEQUENCE_CYCLONEBRIDGEDATA_OPERATOR_DEFINED
-typedef struct dds_sequence_CycloneBridgeData_Operator
-{
-  uint32_t _maximum;
-  uint32_t _length;
-  struct CycloneBridgeData_Operator *_buffer;
-  bool _release;
-} dds_sequence_CycloneBridgeData_Operator;
-
-#define dds_sequence_CycloneBridgeData_Operator__alloc() \
-((dds_sequence_CycloneBridgeData_Operator*) dds_alloc (sizeof (dds_sequence_CycloneBridgeData_Operator)));
-
-#define dds_sequence_CycloneBridgeData_Operator_allocbuf(l) \
-((struct CycloneBridgeData_Operator *) dds_alloc ((l) * sizeof (struct CycloneBridgeData_Operator)))
-#endif /* DDS_SEQUENCE_CYCLONEBRIDGEDATA_OPERATOR_DEFINED */
-
-#ifndef DDS_SEQUENCE_CYCLONEBRIDGEDATA_VARIABLE_DEFINED
-#define DDS_SEQUENCE_CYCLONEBRIDGEDATA_VARIABLE_DEFINED
-typedef struct dds_sequence_CycloneBridgeData_Variable
-{
-  uint32_t _maximum;
-  uint32_t _length;
-  struct CycloneBridgeData_Variable *_buffer;
-  bool _release;
-} dds_sequence_CycloneBridgeData_Variable;
-
-#define dds_sequence_CycloneBridgeData_Variable__alloc() \
-((dds_sequence_CycloneBridgeData_Variable*) dds_alloc (sizeof (dds_sequence_CycloneBridgeData_Variable)));
-
-#define dds_sequence_CycloneBridgeData_Variable_allocbuf(l) \
-((struct CycloneBridgeData_Variable *) dds_alloc ((l) * sizeof (struct CycloneBridgeData_Variable)))
-#endif /* DDS_SEQUENCE_CYCLONEBRIDGEDATA_VARIABLE_DEFINED */
-
-typedef struct CycloneBridgeData_Request
-{
-  char * name;
-  dds_sequence_CycloneBridgeData_Operator ops;
-  dds_sequence_CycloneBridgeData_Variable vars;
-} CycloneBridgeData_Request;
-
-extern const dds_topic_descriptor_t CycloneBridgeData_Request_desc;
-
-#define CycloneBridgeData_Request__alloc() \
-((CycloneBridgeData_Request*) dds_alloc (sizeof (CycloneBridgeData_Request)));
-
-#define CycloneBridgeData_Request_free(d,o) \
-dds_sample_free ((d), &CycloneBridgeData_Request_desc, (o))
-
-typedef struct CycloneBridgeData_Response
-{
-  char * name;
-  struct CycloneBridgeData_Result res;
-} CycloneBridgeData_Response;
-
-extern const dds_topic_descriptor_t CycloneBridgeData_Response_desc;
-
-#define CycloneBridgeData_Response__alloc() \
-((CycloneBridgeData_Response*) dds_alloc (sizeof (CycloneBridgeData_Response)));
-
-#define CycloneBridgeData_Response_free(d,o) \
-dds_sample_free ((d), &CycloneBridgeData_Response_desc, (o))
+#define CycloneBridgeData_IntNumber_free(d,o) \
+dds_sample_free ((d), &CycloneBridgeData_IntNumber_desc, (o))
 
 #ifdef __cplusplus
 }

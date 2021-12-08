@@ -6,11 +6,7 @@
 
 #include <cyclone_bridge/ROS1Config.hpp>
 
-#include <cyclone_bridge/messages/Operator.hpp>
-#include <cyclone_bridge/messages/Request.hpp>
-#include <cyclone_bridge/messages/Response.hpp>
-#include <cyclone_bridge/messages/Result.hpp>
-#include <cyclone_bridge/messages/Variable.hpp>
+#include <cyclone_bridge/messages/IntNumber.hpp>
 
 namespace cyclone_bridge {
 
@@ -22,9 +18,9 @@ public:
 
   static SharedPtr make(const ROS1Config& config);
 
-  bool send_request(const messages::Request& new_request);
+  bool send(const messages::IntNumber& ros1_to_ros2_num);
 
-  bool read_response(messages::Response& new_response);
+  bool read(messages::IntNumber& ros2_to_ros1_num);
 
   /// Destructor
   ~ROS1Bridge();

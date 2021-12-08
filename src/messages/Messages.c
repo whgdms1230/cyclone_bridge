@@ -8,120 +8,23 @@
 *****************************************************************/
 #include "Messages.h"
 
-static const uint32_t CycloneBridgeData_Operator_ops [] =
+static const uint32_t CycloneBridgeData_IntNumber_ops [] =
 {
-  /* Operator */
-  DDS_OP_ADR | DDS_OP_TYPE_4BY, offsetof (CycloneBridgeData_Operator, op),
+  /* IntNumber */
+  DDS_OP_ADR | DDS_OP_TYPE_4BY, offsetof (CycloneBridgeData_IntNumber, int_num),
   DDS_OP_RTS
 };
 
-const dds_topic_descriptor_t CycloneBridgeData_Operator_desc =
+const dds_topic_descriptor_t CycloneBridgeData_IntNumber_desc =
 {
-  .m_size = sizeof (CycloneBridgeData_Operator),
+  .m_size = sizeof (CycloneBridgeData_IntNumber),
   .m_align = 4u,
   .m_flagset = DDS_TOPIC_FIXED_SIZE,
   .m_nkeys = 0u,
-  .m_typename = "CycloneBridgeData::Operator",
+  .m_typename = "CycloneBridgeData::IntNumber",
   .m_keys = NULL,
   .m_nops = 2,
-  .m_ops = CycloneBridgeData_Operator_ops,
-  .m_meta = ""
-};
-
-static const uint32_t CycloneBridgeData_Variable_ops [] =
-{
-  /* Variable */
-  DDS_OP_ADR | DDS_OP_TYPE_4BY | DDS_OP_FLAG_FP, offsetof (CycloneBridgeData_Variable, var),
-  DDS_OP_RTS
-};
-
-const dds_topic_descriptor_t CycloneBridgeData_Variable_desc =
-{
-  .m_size = sizeof (CycloneBridgeData_Variable),
-  .m_align = 4u,
-  .m_flagset = DDS_TOPIC_FIXED_SIZE,
-  .m_nkeys = 0u,
-  .m_typename = "CycloneBridgeData::Variable",
-  .m_keys = NULL,
-  .m_nops = 2,
-  .m_ops = CycloneBridgeData_Variable_ops,
-  .m_meta = ""
-};
-
-static const uint32_t CycloneBridgeData_Result_ops [] =
-{
-  /* Result */
-  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_Result, msg),
-  DDS_OP_ADR | DDS_OP_TYPE_4BY | DDS_OP_FLAG_FP, offsetof (CycloneBridgeData_Result, ans),
-  DDS_OP_RTS
-};
-
-const dds_topic_descriptor_t CycloneBridgeData_Result_desc =
-{
-  .m_size = sizeof (CycloneBridgeData_Result),
-  .m_align = sizeof (char *),
-  .m_flagset = DDS_TOPIC_NO_OPTIMIZE,
-  .m_nkeys = 0u,
-  .m_typename = "CycloneBridgeData::Result",
-  .m_keys = NULL,
-  .m_nops = 3,
-  .m_ops = CycloneBridgeData_Result_ops,
-  .m_meta = ""
-};
-
-static const uint32_t CycloneBridgeData_Request_ops [] =
-{
-  /* Request */
-  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_Request, name),
-  DDS_OP_ADR | DDS_OP_TYPE_SEQ | DDS_OP_SUBTYPE_STU, offsetof (CycloneBridgeData_Request, ops), sizeof (CycloneBridgeData_Operator), (4u << 16u) + 9u /* Operator */,
-  DDS_OP_ADR | DDS_OP_TYPE_SEQ | DDS_OP_SUBTYPE_STU, offsetof (CycloneBridgeData_Request, vars), sizeof (CycloneBridgeData_Variable), (4u << 16u) + 8u /* Variable */,
-  DDS_OP_RTS,
-
-  /* Operator */
-  DDS_OP_ADR | DDS_OP_TYPE_4BY, offsetof (CycloneBridgeData_Operator, op),
-  DDS_OP_RTS,
-
-  /* Variable */
-  DDS_OP_ADR | DDS_OP_TYPE_4BY | DDS_OP_FLAG_FP, offsetof (CycloneBridgeData_Variable, var),
-  DDS_OP_RTS
-};
-
-const dds_topic_descriptor_t CycloneBridgeData_Request_desc =
-{
-  .m_size = sizeof (CycloneBridgeData_Request),
-  .m_align = sizeof (char *),
-  .m_flagset = DDS_TOPIC_NO_OPTIMIZE,
-  .m_nkeys = 0u,
-  .m_typename = "CycloneBridgeData::Request",
-  .m_keys = NULL,
-  .m_nops = 8,
-  .m_ops = CycloneBridgeData_Request_ops,
-  .m_meta = ""
-};
-
-static const uint32_t CycloneBridgeData_Response_ops [] =
-{
-  /* Response */
-  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_Response, name),
-  DDS_OP_ADR | DDS_OP_TYPE_EXT, offsetof (CycloneBridgeData_Response, res), (3u << 16u) + 4u /* Result */,
-  DDS_OP_RTS,
-
-  /* Result */
-  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_Result, msg),
-  DDS_OP_ADR | DDS_OP_TYPE_4BY | DDS_OP_FLAG_FP, offsetof (CycloneBridgeData_Result, ans),
-  DDS_OP_RTS
-};
-
-const dds_topic_descriptor_t CycloneBridgeData_Response_desc =
-{
-  .m_size = sizeof (CycloneBridgeData_Response),
-  .m_align = sizeof (char *),
-  .m_flagset = DDS_TOPIC_NO_OPTIMIZE,
-  .m_nkeys = 0u,
-  .m_typename = "CycloneBridgeData::Response",
-  .m_keys = NULL,
-  .m_nops = 6,
-  .m_ops = CycloneBridgeData_Response_ops,
+  .m_ops = CycloneBridgeData_IntNumber_ops,
   .m_meta = ""
 };
 
