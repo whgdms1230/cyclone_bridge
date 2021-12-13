@@ -1,34 +1,16 @@
 module CycloneBridgeData
 {
-  module Operator_Constants
+  struct IntNumber
   {
-    const unsigned long PLUS = 0;
-    const unsigned long MINUS = 1;
-    const unsigned long MULTIPLY = 2;
-    const unsigned long DIVISION = 3;
+    uint32 int_num;
   };
-  struct Operator
+  struct StrString
   {
-    unsigned long op;
+    string messages;
   };
-  struct Variable
+  struct Msg
   {
-    float var;
-  };
-  struct Result
-  {
-    string msg;
-    float ans;
-  };
-  struct Request
-  {
-    string name;
-    sequence<Operator> ops;
-    sequence<Variable> vars;
-  };
-  struct Response
-  {
-    string name;
-    Result res;
+    IntNumber cnt;
+    StrString messages;
   };
 };
