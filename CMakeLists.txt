@@ -21,6 +21,7 @@ add_library(cyclone_bridge SHARED
   src/ROS1Impl.cpp
   src/ROS2Bridge.cpp
   src/ROS2Impl.cpp
+  src/dds_utils/common.cpp
   src/messages/Messages.c
 )
 
