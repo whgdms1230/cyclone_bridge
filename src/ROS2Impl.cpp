@@ -1,11 +1,11 @@
 
 #include "ROS2Impl.hpp"
-#include "messages/message_utils.hpp"
+#include "dds_utils/common.hpp"
 
 namespace cyclone_bridge {
 
 ROS2Bridge::ROS2Impl::ROS2Impl(const ROS2Config& _config) :
-  server_config(_config)
+  ros2_config(_config)
 {}
 
 ROS2Bridge::ROS2Impl::~ROS2Impl()
@@ -22,23 +22,26 @@ void ROS2Bridge::ROS2Impl::start(Fields _fields)
   fields = std::move(_fields);
 }
 
-bool ROS2Bridge::ROS2Impl::read_request(messages::Request& _new_request)
+bool ROS2Bridge::ROS2Impl::read(messages::Msg& ros1_to_ros2_msg)
 {
-  auto request = fields.request_sub->read();
-  if (!request.empty())
+  auto msg = fields.read_sub->read();
+  if (!msg.empty())
   {
-    convert(*(request[0]), _new_request);
+    ros1_to_ros2_msg.cnt.int_num = msg[0]->cnt.int_num;
+    ros1_to_ros2_msg.messages.messages = std::string(msg[0]->messages.messages);
     return true;
   }
   return false;
 }
 
-bool ROS2Bridge::ROS2Impl::send_response(const messages::Response& _new_response)
+bool ROS2Bridge::ROS2Impl::send(const messages::Msg& ros2_to_ros1_msg)
 {
-  CycloneBridgeData_Response* new_rs = CycloneBridgeData_Response__alloc();
-  convert(_new_response, *new_rs);
-  bool sent = fields.response_pub->write(new_rs);
-  CycloneBridgeData_Response_free(new_rs, DDS_FREE_ALL);
+  CycloneBridgeData_Msg* msg = CycloneBridgeData_Msg__alloc();
+  msg->cnt.int_num = ros2_to_ros1_msg.cnt.int_num;
+  msg->messages.messages = common::dds_string_alloc_and_copy(ros2_to_ros1_msg.messages.messages);
+
+  bool sent = fields.send_pub->write(msg);
+  CycloneBridgeData_Msg_free(msg, DDS_FREE_ALL);
   return sent;
 }
 

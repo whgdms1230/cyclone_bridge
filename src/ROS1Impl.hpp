@@ -2,11 +2,7 @@
 #ifndef CYCLONE_BRIDGE__SRC__ROS1IMPL_HPP
 #define CYCLONE_BRIDGE__SRC__ROS1IMPL_HPP
 
-#include <cyclone_bridge/messages/Operator.hpp>
-#include <cyclone_bridge/messages/Request.hpp>
-#include <cyclone_bridge/messages/Response.hpp>
-#include <cyclone_bridge/messages/Result.hpp>
-#include <cyclone_bridge/messages/Variable.hpp>
+#include <cyclone_bridge/messages/Msg.hpp>
 
 #include <cyclone_bridge/ROS1Bridge.hpp>
 #include <cyclone_bridge/ROS1Config.hpp>
@@ -28,11 +24,11 @@ public:
   {
     dds_entity_t participant;
 
-    dds::DDSPublishHandler<CycloneBridgeData_Request>::SharedPtr
-        request_pub;
+    dds::DDSPublishHandler<CycloneBridgeData_Msg>::SharedPtr
+        send_pub;
 
-    dds::DDSSubscribeHandler<CycloneBridgeData_Response>::SharedPtr 
-        response_sub;
+    dds::DDSSubscribeHandler<CycloneBridgeData_Msg>::SharedPtr 
+        read_sub;
   };
 
   ROS1Impl(const ROS1Config& config);
@@ -41,15 +37,15 @@ public:
 
   void start(Fields fields);
 
-  bool send_request(const messages::Request& new_request);
+  bool send(const messages::Msg& ros1_to_ros2_msg);
 
-  bool read_response(messages::Response& new_response);
+  bool read(messages::Msg& ros2_to_ros1_msg);
 
 private:
 
   Fields fields;
 
-  ROS1Config client_config;
+  ROS1Config ros1_config;
 
 };
 

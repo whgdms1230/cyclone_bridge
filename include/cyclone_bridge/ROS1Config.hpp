@@ -9,10 +9,8 @@ namespace cyclone_bridge {
 struct ROS1Config
 {
   int dds_domain = 100;
-  std::string dds_request_topic = "request";
-  std::string dds_response_topic = "response";
-
-  void print_config() const;
+  std::string dds_ros1_to_ros2_topic = "ros1_to_ros2";
+  std::string dds_ros2_to_ros1_topic = "ros2_to_ros1";
 };
 
 } // namespace cyclone_bridge
