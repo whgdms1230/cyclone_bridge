@@ -7,7 +7,7 @@
 
 #include <cyclone_bridge/ROS2Config.hpp>
 
-#include <cyclone_bridge/messages/IntNumber.hpp>
+#include <cyclone_bridge/messages/Msg.hpp>
 
 namespace cyclone_bridge {
 
@@ -19,9 +19,9 @@ public:
 
   static SharedPtr make(const ROS2Config& config);
 
-  bool read(messages::IntNumber& ros1_to_ros2_num);
+  bool read(messages::Msg& ros1_to_ros2_msg);
 
-  bool send(const messages::IntNumber& ros2_to_ros1_num);
+  bool send(const messages::Msg& ros2_to_ros1_msg);
 
   /// Destructor
   ~ROS2Bridge();

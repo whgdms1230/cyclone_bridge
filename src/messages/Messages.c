@@ -28,3 +28,52 @@ const dds_topic_descriptor_t CycloneBridgeData_IntNumber_desc =
   .m_meta = ""
 };
 
+static const uint32_t CycloneBridgeData_StrString_ops [] =
+{
+  /* StrString */
+  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_StrString, messages),
+  DDS_OP_RTS
+};
+
+const dds_topic_descriptor_t CycloneBridgeData_StrString_desc =
+{
+  .m_size = sizeof (CycloneBridgeData_StrString),
+  .m_align = sizeof (char *),
+  .m_flagset = DDS_TOPIC_NO_OPTIMIZE,
+  .m_nkeys = 0u,
+  .m_typename = "CycloneBridgeData::StrString",
+  .m_keys = NULL,
+  .m_nops = 2,
+  .m_ops = CycloneBridgeData_StrString_ops,
+  .m_meta = ""
+};
+
+static const uint32_t CycloneBridgeData_Msg_ops [] =
+{
+  /* Msg */
+  DDS_OP_ADR | DDS_OP_TYPE_EXT, offsetof (CycloneBridgeData_Msg, cnt), (3u << 16u) + 7u /* IntNumber */,
+  DDS_OP_ADR | DDS_OP_TYPE_EXT, offsetof (CycloneBridgeData_Msg, messages), (3u << 16u) + 7u /* StrString */,
+  DDS_OP_RTS,
+
+  /* IntNumber */
+  DDS_OP_ADR | DDS_OP_TYPE_4BY, offsetof (CycloneBridgeData_IntNumber, int_num),
+  DDS_OP_RTS,
+
+  /* StrString */
+  DDS_OP_ADR | DDS_OP_TYPE_STR, offsetof (CycloneBridgeData_StrString, messages),
+  DDS_OP_RTS
+};
+
+const dds_topic_descriptor_t CycloneBridgeData_Msg_desc =
+{
+  .m_size = sizeof (CycloneBridgeData_Msg),
+  .m_align = sizeof (char *),
+  .m_flagset = DDS_TOPIC_NO_OPTIMIZE,
+  .m_nkeys = 0u,
+  .m_typename = "CycloneBridgeData::Msg",
+  .m_keys = NULL,
+  .m_nops = 7,
+  .m_ops = CycloneBridgeData_Msg_ops,
+  .m_meta = ""
+};
+

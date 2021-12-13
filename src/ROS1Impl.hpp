@@ -2,7 +2,7 @@
 #ifndef CYCLONE_BRIDGE__SRC__ROS1IMPL_HPP
 #define CYCLONE_BRIDGE__SRC__ROS1IMPL_HPP
 
-#include <cyclone_bridge/messages/IntNumber.hpp>
+#include <cyclone_bridge/messages/Msg.hpp>
 
 #include <cyclone_bridge/ROS1Bridge.hpp>
 #include <cyclone_bridge/ROS1Config.hpp>
@@ -24,10 +24,10 @@ public:
   {
     dds_entity_t participant;
 
-    dds::DDSPublishHandler<CycloneBridgeData_IntNumber>::SharedPtr
+    dds::DDSPublishHandler<CycloneBridgeData_Msg>::SharedPtr
         send_pub;
 
-    dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>::SharedPtr 
+    dds::DDSSubscribeHandler<CycloneBridgeData_Msg>::SharedPtr 
         read_sub;
   };
 
@@ -37,9 +37,9 @@ public:
 
   void start(Fields fields);
 
-  bool send(const messages::IntNumber& ros1_to_ros2_num);
+  bool send(const messages::Msg& ros1_to_ros2_msg);
 
-  bool read(messages::IntNumber& ros2_to_ros1_num);
+  bool read(messages::Msg& ros2_to_ros1_msg);
 
 private:
 

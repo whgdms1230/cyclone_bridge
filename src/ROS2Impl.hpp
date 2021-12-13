@@ -24,10 +24,10 @@ public:
   {
     dds_entity_t participant;
 
-    dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>::SharedPtr 
+    dds::DDSSubscribeHandler<CycloneBridgeData_Msg>::SharedPtr 
         read_sub;
 
-    dds::DDSPublishHandler<CycloneBridgeData_IntNumber>::SharedPtr
+    dds::DDSPublishHandler<CycloneBridgeData_Msg>::SharedPtr
         send_pub;
   };
 
@@ -37,9 +37,9 @@ public:
 
   void start(Fields fields);
 
-  bool read(messages::IntNumber& ros1_to_ros2_num);
+  bool read(messages::Msg& ros1_to_ros2_msg);
 
-  bool send(const messages::IntNumber& ros2_to_ros1_num);
+  bool send(const messages::Msg& ros2_to_ros1_msg);
 
 private:
 

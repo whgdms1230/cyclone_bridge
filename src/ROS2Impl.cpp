@@ -21,24 +21,24 @@ void ROS2Bridge::ROS2Impl::start(Fields _fields)
   fields = std::move(_fields);
 }
 
-bool ROS2Bridge::ROS2Impl::read(messages::IntNumber& ros1_to_ros2_num)
+bool ROS2Bridge::ROS2Impl::read(messages::Msg& ros1_to_ros2_msg)
 {
-  auto num = fields.read_sub->read();
-  if (!num.empty())
+  auto msg = fields.read_sub->read();
+  if (!msg.empty())
   {
-    ros1_to_ros2_num.int_num = num[0]->int_num;
+    ros1_to_ros2_msg.cnt.int_num = msg[0]->cnt.int_num;
     return true;
   }
   return false;
 }
 
-bool ROS2Bridge::ROS2Impl::send(const messages::IntNumber& ros2_to_ros1_num)
+bool ROS2Bridge::ROS2Impl::send(const messages::Msg& ros2_to_ros1_msg)
 {
-  CycloneBridgeData_IntNumber* num = CycloneBridgeData_IntNumber__alloc();
-  num->int_num = ros2_to_ros1_num.int_num;
+  CycloneBridgeData_Msg* msg = CycloneBridgeData_Msg__alloc();
+  msg->cnt.int_num = ros2_to_ros1_msg.cnt.int_num;
 
-  bool sent = fields.send_pub->write(num);
-  CycloneBridgeData_IntNumber_free(num, DDS_FREE_ALL);
+  bool sent = fields.send_pub->write(msg);
+  CycloneBridgeData_Msg_free(msg, DDS_FREE_ALL);
   return sent;
 }
 

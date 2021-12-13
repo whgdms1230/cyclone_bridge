@@ -28,6 +28,33 @@ extern const dds_topic_descriptor_t CycloneBridgeData_IntNumber_desc;
 #define CycloneBridgeData_IntNumber_free(d,o) \
 dds_sample_free ((d), &CycloneBridgeData_IntNumber_desc, (o))
 
+typedef struct CycloneBridgeData_StrString
+{
+  char * messages;
+} CycloneBridgeData_StrString;
+
+extern const dds_topic_descriptor_t CycloneBridgeData_StrString_desc;
+
+#define CycloneBridgeData_StrString__alloc() \
+((CycloneBridgeData_StrString*) dds_alloc (sizeof (CycloneBridgeData_StrString)));
+
+#define CycloneBridgeData_StrString_free(d,o) \
+dds_sample_free ((d), &CycloneBridgeData_StrString_desc, (o))
+
+typedef struct CycloneBridgeData_Msg
+{
+  struct CycloneBridgeData_IntNumber cnt;
+  struct CycloneBridgeData_StrString messages;
+} CycloneBridgeData_Msg;
+
+extern const dds_topic_descriptor_t CycloneBridgeData_Msg_desc;
+
+#define CycloneBridgeData_Msg__alloc() \
+((CycloneBridgeData_Msg*) dds_alloc (sizeof (CycloneBridgeData_Msg)));
+
+#define CycloneBridgeData_Msg_free(d,o) \
+dds_sample_free ((d), &CycloneBridgeData_Msg_desc, (o))
+
 #ifdef __cplusplus
 }
 #endif

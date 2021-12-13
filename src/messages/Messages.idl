@@ -4,4 +4,13 @@ module CycloneBridgeData
   {
     uint32 int_num;
   };
+  struct StrString
+  {
+    string messages;
+  };
+  struct Msg
+  {
+    IntNumber cnt;
+    StrString messages;
+  };
 };

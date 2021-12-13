@@ -23,15 +23,15 @@ ROS2Bridge::SharedPtr ROS2Bridge::make(const ROS2Config& _config)
     return nullptr;
   }
 
-  dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>::SharedPtr read_sub(
-      new dds::DDSSubscribeHandler<CycloneBridgeData_IntNumber>(
-          participant, &CycloneBridgeData_IntNumber_desc,
+  dds::DDSSubscribeHandler<CycloneBridgeData_Msg>::SharedPtr read_sub(
+      new dds::DDSSubscribeHandler<CycloneBridgeData_Msg>(
+          participant, &CycloneBridgeData_Msg_desc,
           _config.dds_ros1_to_ros2_topic));
 
-  dds::DDSPublishHandler<CycloneBridgeData_IntNumber>::SharedPtr 
+  dds::DDSPublishHandler<CycloneBridgeData_Msg>::SharedPtr 
       send_pub(
-          new dds::DDSPublishHandler<CycloneBridgeData_IntNumber>(
-              participant, &CycloneBridgeData_IntNumber_desc,
+          new dds::DDSPublishHandler<CycloneBridgeData_Msg>(
+              participant, &CycloneBridgeData_Msg_desc,
               _config.dds_ros2_to_ros1_topic));
 
   if (!read_sub->is_ready() || !send_pub->is_ready())
@@ -52,14 +52,14 @@ ROS2Bridge::ROS2Bridge(const ROS2Config& _config)
 ROS2Bridge::~ROS2Bridge()
 {}
 
-bool ROS2Bridge::read(messages::IntNumber& ros1_to_ros2_num)
+bool ROS2Bridge::read(messages::Msg& ros1_to_ros2_msg)
 {
-  return impl->read(ros1_to_ros2_num);
+  return impl->read(ros1_to_ros2_msg);
 }
 
-bool ROS2Bridge::send(const messages::IntNumber& ros2_to_ros1_num)
+bool ROS2Bridge::send(const messages::Msg& ros2_to_ros1_msg)
 {
-  return impl->send(ros2_to_ros1_num);
+  return impl->send(ros2_to_ros1_msg);
 }
 
 } // namespace cyclone_bridge
